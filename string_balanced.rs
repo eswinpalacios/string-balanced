@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 fn is_string_balanced(list_characters: &str) -> bool {    
-    let open: HashMap<&char, char> = [ (&'{', '{'), (&'[', '('), (&'(', '(') ].iter().cloned().collect();
+    let open: HashMap<&char, char> = [ (&'{', '{'), (&'[', '['), (&'(', '(') ].iter().cloned().collect();
     let close: HashMap<&char, char> = [ (&'}', '{'), (&']', '['), (&')', '(') ].iter().cloned().collect();
     let mut stack:Vec<char> = Vec::new();    
 
@@ -9,10 +9,10 @@ fn is_string_balanced(list_characters: &str) -> bool {
         if open.contains_key(&character) {
             stack.push(character)
         } else if close.contains_key(&character) {
-            let c = close.get(&character);
+            let symbol = close.get(&character);
             if stack.len() == 0 {
                 return false
-            } else if Some(&stack[stack.len() - 1 ]) != c{
+            } else if Some(&stack[stack.len() - 1 ]) != symbol {
                 return false
             } else {
                 stack.pop();
